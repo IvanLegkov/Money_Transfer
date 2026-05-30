@@ -57,7 +57,7 @@ fun countTax(transfer: Int, cardType: String = "Мир", currentTransferTotal: I
                     transfer + mastercardDayTransferTotal > dayLimit -> {
                     println("Превышен лимит дневных переводов!")
                 }
-                    transfer + mastercardDayTransferTotal <= mastercardTaxStart -> {
+                    transfer + currentTransferTotal <= mastercardTaxStart -> {
                         mastercardMonthTransferTotal += transfer
                         mastercardDayTransferTotal += transfer
                         println("Комиссия за перевод составила 0 руб. " +
@@ -65,7 +65,7 @@ fun countTax(transfer: Int, cardType: String = "Мир", currentTransferTotal: I
                 }
                     else -> {
                         val taxCount: Int =
-                            ((transfer + mastercardDayTransferTotal - mastercardTaxStart) * mastercardTaxPercent + mastercardTaxConstant).toInt()
+                            ((transfer + currentTransferTotal - mastercardTaxStart) * mastercardTaxPercent + mastercardTaxConstant).toInt()
                         mastercardMonthTransferTotal += transfer
                         mastercardDayTransferTotal += transfer
                         println("Комиссия за перевод составила $taxCount руб.")
